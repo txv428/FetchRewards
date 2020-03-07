@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var dataFetched : dataModal?
+    var dataFetched : [[String:AnyObject]]?
     var id: String?
     
     @IBOutlet weak var apiTableView: UITableView!
@@ -49,7 +49,7 @@ extension ViewController {
             
             if data != nil {
                 dataRes = try? JSONDecoder().decode(dataModal.self, from: data!)
-                self.dataFetched = dataRes!
+                print(dataRes!)
             }
         }.resume()
         
