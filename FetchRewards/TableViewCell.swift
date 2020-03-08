@@ -13,10 +13,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var text1: UILabel!
     
     @IBOutlet weak var text2: UILabel!
-    
-    var index: Int?
-    var message : String?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
