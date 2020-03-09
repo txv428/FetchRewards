@@ -10,9 +10,12 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
-    @IBOutlet weak var text1: UILabel!
+    @IBOutlet weak var name: UILabel!
     
-    @IBOutlet weak var text2: UILabel!
+    @IBOutlet weak var id: UILabel!
+    
+    @IBOutlet weak var listId: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

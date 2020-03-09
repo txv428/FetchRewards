@@ -11,14 +11,14 @@ import Foundation
 // Decoder //Stuct will be faster than class
 // Codable protocol to confirm the decodable or encodable. If we don't confirm the protocol we don't get the data from JSONDecoder
 struct dataModal: Codable {
-    var code: Int?
-    var message: String?
-    var data: [dataVal]?
+    var id: Int?
+    var listId: Int?
+    var name: String?
 }
 
-struct dataVal: Codable {
-    var id: Int?
-    var name: String?
-    var skills: String?
-    var image: String?
-}
+//struct dataVal: Codable {
+//    var id: Int?
+//    var name: String?
+//    var skills: String?
+//    var image: String?
+//}
