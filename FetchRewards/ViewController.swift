@@ -78,7 +78,7 @@ extension ViewController {
                 // sorting the records using name and having same listId
                 self.testData = dataRes!.sorted {
                     if $0.listId! == $1.listId! {
-                        return $0.name! < $1.name!
+                        return $0.id! < $1.id!
                     }
                     else {
                         return true
