@@ -15,7 +15,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var id: UILabel!
     
     @IBOutlet weak var listId: UILabel!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()

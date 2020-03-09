@@ -8,9 +8,6 @@
 
 import UIKit
 
-//let cellStaticHeight:CGFloat = 55.0 // cell height, except name, skill label and height constraints
-//let cellLabelWidth:CGFloat = 150.0 // cell label width, except image and width constraints
-
 class ViewController: UIViewController {
     
     var testData : [dataModal]?
@@ -22,23 +19,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         getDataFromServer()
     }
-
-    // <MARK :- calculate label height for content>
-//    func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat {
-//        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
-//        label.numberOfLines = 0
-//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        label.font = font
-//        label.text = text
-//        label.sizeToFit()
-//        
-//        return label.frame.height
-//    }
 }
 
+// UI operations to fill the data into table
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        // number of records in the final data
         if let data = testData {
             return data.count
         }
@@ -59,10 +45,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        // height of each cell
+        return 150
     }
 }
 
+// GET request make an API call and fetch the json data using JSONDecoder
 extension ViewController {
     func getDataFromServer() {
         // URL data
@@ -70,20 +58,24 @@ extension ViewController {
         var temp: [dataModal]?
         
         let url_ = URL(string: "https://api.jsonbin.io/b/5e0f707f56e18149ebbebf5f/2")
-        var urlreq_ = URLRequest(url: url_!) //Default http - GET
+        var urlreq_ = URLRequest(url: url_!)
+        // http - GET request
         urlreq_.httpMethod = "GET"
         urlreq_.addValue("$2b$10$Vr2RAD3mpzFZ6o8bPZNlgOOM0LmFLvN24IoxlELo3arTgNszX7otS", forHTTPHeaderField: "secret-key")
                 
         URLSession.shared.dataTask(with: urlreq_) {(data, res, err) in
             if data != nil {
+                // dataRes is the data fetched from the API
                 dataRes = try? JSONDecoder().decode([dataModal].self, from: data!)
+                // Filtering the records with nill or empty name
                 temp = dataRes!.filter({
                     return ($0.name != nil && $0.name! != "")
                 })
+                // sorting the records with listID using sorted higherorder function
                 dataRes = temp!.sorted { (a, b) -> Bool in
                     return a.listId! > b.listId!
                 }
-
+                // sorting the records using name and having same listId
                 self.testData = dataRes!.sorted {
                     if $0.listId! == $1.listId! {
                         return $0.name! < $1.name!
